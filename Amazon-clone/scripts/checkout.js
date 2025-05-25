@@ -6,6 +6,7 @@ import { deliveryOptions, getDeliveryOption } from '../data/deliveryOptions.js';
 import { renderPaymentSummary } from "./paymentSummary.js";
 import { loadProducts } from "../data/products.js";
 
+
 new Promise((resolve) => {
   loadProducts(() => {
     resolve()

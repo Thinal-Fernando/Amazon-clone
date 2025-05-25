@@ -16,6 +16,10 @@ export function loadProducts(callback) {
     products = JSON.parse(xhr.response);
     if (callback) callback();
   })
+
+  xhr.addEventListener('error', (error) => {
+    console.error(`Error! Please try again later: ${error}.`);
+  })
   xhr.open('GET', 'https://supersimplebackend.dev/products');
   xhr.send();
 
