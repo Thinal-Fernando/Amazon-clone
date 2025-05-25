@@ -6,10 +6,15 @@ import { deliveryOptions, getDeliveryOption } from '../data/deliveryOptions.js';
 import { renderPaymentSummary } from "./paymentSummary.js";
 import { loadProducts } from "../data/products.js";
 
-loadProducts(() => {
+new Promise((resolve) => {
+  loadProducts(() => {
+    resolve()
+  });
+}).then(() => {
   renderOrderSummary();
   renderPaymentSummary()
-});
+})
+
 function renderOrderSummary() {
 
   let cartSummaryHTML = ''
