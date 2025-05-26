@@ -13,7 +13,8 @@ new Promise((resolve) => {
   });
 }).then(() => {
   renderOrderSummary();
-  renderPaymentSummary()
+  renderPaymentSummary();
+  updateCheckoutQuantity(); // Add this to update cart quantity on page load
 })
 
 function renderOrderSummary() {
@@ -100,6 +101,8 @@ function renderOrderSummary() {
   document.querySelector('.js-order-summary')
     .innerHTML = cartSummaryHTML;
 
+  updateCheckoutQuantity();
+
   document.querySelectorAll('.js-delete-link')
     .forEach((link) => {
       link.addEventListener('click', () => {
@@ -109,7 +112,8 @@ function renderOrderSummary() {
         const container = document.querySelector(`.js-cart-item-constiner-${productId}`);
         container.remove();
 
-        renderPaymentSummary()
+        renderPaymentSummary();
+        updateCheckoutQuantity();
       })
     })
 
@@ -123,3 +127,13 @@ function renderOrderSummary() {
   })
 }
 
+function updateCheckoutQuantity() {
+  let cartQuantity = 0;
+
+  cart.forEach((cartItem) => {
+    cartQuantity += cartItem.quantity;
+  })
+
+  document.querySelector('.js-cart-quantity-checkout').innerHTML = `${cartQuantity} items`;
+
+}
